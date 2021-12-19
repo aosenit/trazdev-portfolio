@@ -299,11 +299,11 @@ nav ul li a {
   background-color: transparent;
   border: 1px solid var(--white-color);
   color: var(--white-color);
+  opacity: 0.8;
+  transition: all 0.5s ease-in-out 0s;
 }
 #header button:hover {
-  color: var(--white-color);
-  background-color: var(--primary-color);
-  border: none;
+  opacity: 1;
 }
 
 /*-----------------------------------------------------------------------------------*/
@@ -378,6 +378,7 @@ nav ul li a {
 
 .owl-item {
   float: right;
+  margin: 1rem 0;
 }
 .services-block span {
   margin: 10px 0;
@@ -391,7 +392,6 @@ nav ul li a {
 }
 
 .services-block .separator {
-  margin: 0;
   font-size: 13px;
   line-height: 22px;
 }

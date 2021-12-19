@@ -99,6 +99,6 @@ $(document).ready(function () {
     dots: true,
     nav: false,
     responsiveClass: true,
-    responsive: { 0: { items: 3 }, 768: { items: 4 }, 900: { items: 4 } },
+    responsive: { 0: { items: 3 }, 768: { items: 4 }, 900: { items: 6 } },
   });
 });
