@@ -83,7 +83,7 @@ $(document).ready(function () {
   $(function () {
     typed.typed({
       strings: ["Adedoyin Oseni.", "A Developer.", " A Freelancer."],
-      typeSpeed: 100,
+      typeSpeed: 200,
       loop: true,
     });
   });

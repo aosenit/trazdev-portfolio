@@ -302,7 +302,7 @@
             </div>
 
             <div class="col-lg-6">
-              <form action="" method="post" role="form" class="contactForm">
+              <form class="contact-form">
                 <div class="row">
                   <div id="sendmessage">
                     Your message has been sent. Thank you!
@@ -314,7 +314,7 @@
                       <input
                         type="text"
                         name="name"
-                        class="form-control"
+                        class="form-control names"
                         id="name"
                         placeholder="Your Name"
                         data-rule="minlen:4"
@@ -327,8 +327,8 @@
                   <div class="col-lg-6">
                     <div class="form-group">
                       <input
-                        type="email"
-                        class="form-control"
+                        type="email "
+                        class="form-control emails"
                         name="email"
                         id="email"
                         placeholder="Your Email"
@@ -343,7 +343,7 @@
                     <div class="form-group">
                       <input
                         type="text"
-                        class="form-control"
+                        class="form-control subjects"
                         name="subject"
                         id="subject"
                         placeholder="Subject"
@@ -357,7 +357,7 @@
                   <div class="col-lg-12">
                     <div class="form-group">
                       <textarea
-                        class="form-control"
+                        class="form-control messages"
                         name="message"
                         rows="12"
                         data-rule="required"
@@ -373,6 +373,7 @@
                       type="submit"
                       class="btn btn-defeault btn-send footerButton"
                       value="Send message"
+                      id="submit"
                     />
                   </div>
                 </div>
@@ -428,7 +429,8 @@
     <script src="lib/isotope/isotope.pkgd.min.js"></script>
 
     <!-- Contact Form JavaScript File -->
-    <script src="contactform/contactform.js"></script>
+    <script src="contactform/contactform.js" type="module"></script>
+
 
     <!-- Template Main Javascript File -->
     <script src="js/main.js"></script>

@@ -1,114 +1,52 @@
-jQuery(document).ready(function($) {
-  "use strict";
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+import {
+  getDatabase,
+  ref,
+  set,
+} from "https://www.gstatic.com/firebasejs/9.6.1/firebase-database.js";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-  //Contact
-  $('form.contactForm').submit(function() {
-    var f = $(this).find('.form-group'),
-      ferror = false,
-      emailExp = /^[^\s()<>@,;:\/]+@\w[\w\.-]+\.[a-z]{2,}$/i;
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyDCJnN5WjzMdwp1uSmQOk_2MFB9LG_84oY",
+  authDomain: "ade-portfolio-6e141.firebaseapp.com",
+  projectId: "ade-portfolio-6e141",
+  storageBucket: "ade-portfolio-6e141.appspot.com",
+  messagingSenderId: "99454661604",
+  appId: "1:99454661604:web:2735aa9cd47bb788570df1",
+};
 
-    f.children('input').each(function() { // run all inputs
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getDatabase(app);
 
-      var i = $(this); // current input
-      var rule = i.attr('data-rule');
+//get submit button
+const submitBtn = document.getElementById("submit");
 
-      if (rule !== undefined) {
-        var ierror = false; // error flag for current input
-        var pos = rule.indexOf(':', 0);
-        if (pos >= 0) {
-          var exp = rule.substr(pos + 1, rule.length);
-          rule = rule.substr(0, pos);
-        } else {
-          rule = rule.substr(pos + 1, rule.length);
-        }
+//add event listener to submit button
+submitBtn.addEventListener("click", (e) => {
+  e.preventDefault();
 
-        switch (rule) {
-          case 'required':
-            if (i.val() === '') {
-              ferror = ierror = true;
-            }
-            break;
+  //get form values
+  const name = document.querySelector(".names").value;
+  const email = document.querySelector(".emails").value.toLowerCase();
+  const subject = document.querySelector(".subjects").value;
+  const message = document.querySelector(".messages").value;
+  const id = (Math.random() * 1000 + "ade").toString().replace(".", "");
 
-          case 'minlen':
-            if (i.val().length < parseInt(exp)) {
-              ferror = ierror = true;
-            }
-            break;
-
-          case 'email':
-            if (!emailExp.test(i.val())) {
-              ferror = ierror = true;
-            }
-            break;
-
-          case 'checked':
-            if (! i.is(':checked')) {
-              ferror = ierror = true;
-            }
-            break;
-
-          case 'regexp':
-            exp = new RegExp(exp);
-            if (!exp.test(i.val())) {
-              ferror = ierror = true;
-            }
-            break;
-        }
-        i.next('.validation').html((ierror ? (i.attr('data-msg') !== undefined ? i.attr('data-msg') : 'wrong Input') : '')).show('blind');
-      }
-    });
-    f.children('textarea').each(function() { // run all inputs
-
-      var i = $(this); // current input
-      var rule = i.attr('data-rule');
-
-      if (rule !== undefined) {
-        var ierror = false; // error flag for current input
-        var pos = rule.indexOf(':', 0);
-        if (pos >= 0) {
-          var exp = rule.substr(pos + 1, rule.length);
-          rule = rule.substr(0, pos);
-        } else {
-          rule = rule.substr(pos + 1, rule.length);
-        }
-
-        switch (rule) {
-          case 'required':
-            if (i.val() === '') {
-              ferror = ierror = true;
-            }
-            break;
-
-          case 'minlen':
-            if (i.val().length < parseInt(exp)) {
-              ferror = ierror = true;
-            }
-            break;
-        }
-        i.next('.validation').html((ierror ? (i.attr('data-msg') != undefined ? i.attr('data-msg') : 'wrong Input') : '')).show('blind');
-      }
-    });
-    if (ferror) return false;
-    else var str = $(this).serialize();
-    $.ajax({
-      type: "POST",
-      url: "contactform/contactform.php",
-      data: str,
-      success: function(msg) {
-        // alert(msg);
-        if (msg == 'OK') {
-          $("#sendmessage").addClass("show");
-          $("#errormessage").removeClass("show");
-          $('.contactForm').find("input, textarea").val("");
-        } else {
-          $("#sendmessage").removeClass("show");
-          $("#errormessage").addClass("show");
-          $('#errormessage').html(msg);
-        }
-
-      }
-    });
-    return false;
+  //save data to firebase
+  set(ref(db, "users/" + id), {
+    name: name,
+    email: email,
+    subject: subject,
+    message: message,
   });
 
+  //reset form
+  document.querySelector(".contact-form").reset();
+
+  //show alert
+  alert("Message sent successfully");
 });
